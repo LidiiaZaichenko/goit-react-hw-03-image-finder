@@ -28,7 +28,7 @@ export class App extends Component {
     return (
       <div>
         <Searchbar />
-        <ImageGallery listImages={galleryItems} />
+        <ImageGallery listImages={galleryItems} /> 
         <ImageGalleryItem />
         <Modal />
         <Button />
