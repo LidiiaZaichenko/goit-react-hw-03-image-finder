@@ -17,7 +17,7 @@ export class App extends Component {
     try {
       const gallery = await getGallery();
       this.setState({ galleryItems: gallery });
-       console.log(getGallery());
+         console.log(gallery);
     } catch (error) {
       this.setState({ error: true });
     }
