@@ -1,12 +1,8 @@
 
 export const ImageGallery = ({listImages}) => {
     return     <ul>
-  </ul>
-}
-
-
-// {listImages.map(listImage => (
-//   <li key={listImage.id}>
-//     <img src={listImage.pageURL}/>
-//   </li>
-// ))}
+{listImages.map(listImage => (
+<li key={listImage.hits.id}>
+<img src={listImage.hits.pageURL}/>
+</li>)}
+</ul>}
