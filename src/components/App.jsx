@@ -17,10 +17,11 @@ export class App extends Component {
     try {
       const gallery = await getGallery();
       this.setState({ galleryItems: gallery });
+       console.log(getGallery());
     } catch (error) {
       this.setState({ error: true });
     }
-    console.log(getGallery());
+   
   }
 
   render() {
