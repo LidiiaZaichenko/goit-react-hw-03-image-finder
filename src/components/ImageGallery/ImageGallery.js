@@ -1,8 +1,11 @@
-
-export const ImageGallery = ({listImages}) => {
-    return     <ul>
-{listImages.map(listImage => (
-<li key={listImage.hits.id}>
-<img src={listImage.hits.pageURL}/>
-</li>)}
-</ul>}
+export const ImageGallery = ({ listImages }) => {
+  return (
+    <ul>
+  {listImages.hits.map(listImage => (
+  <li >
+    <img src={listImage.pageURL} />
+  </li>
+))}
+    </ul>
+  );
+};

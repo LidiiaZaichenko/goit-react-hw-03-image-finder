@@ -5,24 +5,23 @@ import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
-import {getGallery} from 'api'
+import { fetchImages } from 'api';
 
 export class App extends Component {
   state = {
     galleryItems: [],
     error: false,
+    query: '',
   };
 
   async componentDidMount() {
     try {
-      const gallery = await getGallery();
+      const gallery = await fetchImages();
       this.setState({ galleryItems: gallery });
-        
-        console.log(gallery);
+      console.log(gallery);
     } catch (error) {
       this.setState({ error: true });
     }
-   
   }
 
   render() {
@@ -30,7 +29,7 @@ export class App extends Component {
     return (
       <div>
         <Searchbar />
-        <ImageGallery listImages={galleryItems} /> 
+        <ImageGallery listImages={galleryItems} />
         <ImageGalleryItem />
         <Modal />
         <Button />
