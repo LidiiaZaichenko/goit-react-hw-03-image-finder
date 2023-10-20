@@ -11,7 +11,7 @@ const params = new URLSearchParams({
   per_page: 12,
 });
 
-export const fetchImages = async (curerntPage, valueImput) => {
+export const fetchImages = async () => {
   const response = await axios.get(`${BASE_URL}${params}`);
   return response.data;
 };
