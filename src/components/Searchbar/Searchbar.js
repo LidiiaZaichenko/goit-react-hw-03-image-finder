@@ -1,10 +1,10 @@
 export const Searchbar = ({ onSubmit }) => {
   return (
     <div>
-      <header >
-        <form >
-          <button type="submit" >
-            <span >Search</span>
+      <header>
+        <form>
+          <button type="submit">
+            <span>Search</span>
           </button>
           <input
             type="text"
