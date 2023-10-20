@@ -5,7 +5,7 @@ import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
 import { fetchImages } from 'api';
-import { AppStyled } from './App.styled';
+
 
 export class App extends Component {
   state = {
