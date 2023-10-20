@@ -13,6 +13,5 @@ const params = new URLSearchParams({
 
 export const fetchImages = async (curerntPage, valueImput) => {
   const response = await axios.get(`${BASE_URL}${params}`);
-  console.log(response);
   return response.data;
 };
