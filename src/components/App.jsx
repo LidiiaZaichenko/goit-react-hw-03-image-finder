@@ -5,6 +5,7 @@ import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
 import { fetchImages } from 'api';
+import { AppStyled } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -25,7 +26,7 @@ export class App extends Component {
 
   async componentDidUpdate() {
     try {
-      const gallery = await fetchImages(this.state.page,this.state.query);
+      const gallery = await fetchImages(this.state.page, this.state.query);
       this.setState({ galleryItems: gallery.hits });
       console.log(gallery);
     } catch (error) {
@@ -38,7 +39,6 @@ export class App extends Component {
       query: newQuery,
     });
   };
-
 
   getVisibImages = () => {
     return this.state.galleryItems.filter(item =>

@@ -1,19 +1,27 @@
+import {
+  SearchForm,
+  SearchFormButton,
+  SearchbarStyled,
+  SearchFormButtonLabel,
+  SearchFormInput,
+} from './Searchbar.styled';
+
 export const Searchbar = ({ onSubmit }) => {
   return (
     <div>
-      <header >
-        <form >
-          <button type="submit" >
-            <span >Search</span>
-          </button>
+      <SearchbarStyled>
+        <SearchForm>
+          <SearchFormButton type="submit">
+            <SearchFormButtonLabel>Search</SearchFormButtonLabel>
+          </SearchFormButton>
 
-          <input
+          <SearchFormInput
             type="text"
             placeholder="Search images and photos"
             onChange={evt => onSubmit(evt.target.value)}
           />
-        </form>
-      </header>
+        </SearchForm>
+      </SearchbarStyled>
     </div>
   );
 };
