@@ -39,7 +39,7 @@ export class App extends Component {
     return (
       <div>
         <Searchbar onSubmit={this.onSubmit} />
-        <ImageGallery listImages={this.getVisibImages()} />
+        <ImageGallery listImages={this.state.galleryItems} />
         <Modal />
         <Button />
         <Loader />
