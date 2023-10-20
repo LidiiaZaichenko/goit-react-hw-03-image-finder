@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
-import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
@@ -17,20 +16,31 @@ export class App extends Component {
   async componentDidMount() {
     try {
       const gallery = await fetchImages();
-      this.setState({ galleryItems: gallery });
+      this.setState({ galleryItems: gallery.hits });
       console.log(gallery);
     } catch (error) {
       this.setState({ error: true });
     }
   }
 
+  onSubmit = newQuery => {
+    this.setState({
+      query: newQuery,
+    });
+  };
+
+  getVisibImages = () => {
+    return this.state.galleryItems.filter(item =>
+      item.tags.toLowerCase().includes(this.state.query.toLowerCase())
+    );
+  };
+
   render() {
     const { galleryItems } = this.state;
     return (
       <div>
-        <Searchbar />
-        <ImageGallery listImages={galleryItems} />
-        <ImageGalleryItem />
+        <Searchbar onSubmit={this.onSubmit} />
+        <ImageGallery listImages={this.getVisibImages()} />
         <Modal />
         <Button />
         <Loader />

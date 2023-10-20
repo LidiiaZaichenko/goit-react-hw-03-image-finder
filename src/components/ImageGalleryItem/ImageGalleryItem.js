@@ -1,7 +1,7 @@
-export const ImageGalleryItem = () => {
-    return <div>
-       ImageGalleryItem
-       ImageGalleryItem
-       ImageGalleryItem
+export const ImageGalleryItem = ({ listImage }) => {
+  return (
+    <div>
+      <img src={listImage.webformatURL} />
     </div>
-}
+  );
+};

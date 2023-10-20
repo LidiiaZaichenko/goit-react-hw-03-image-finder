@@ -1,11 +1,13 @@
+import {ImageGalleryItem} from 'components/ImageGalleryItem/ImageGalleryItem';
+
 export const ImageGallery = ({ listImages }) => {
   return (
     <ul>
-  {/* {listImages.hits.map(listImage => (
-  <li >
-    <img src={listImage.pageURL} />
+  {listImages.map(listImage => (
+  <li key={listImage.id}>
+   <ImageGalleryItem listImage={listImage}/>
   </li>
-))} */}
+))}
     </ul>
   );
 };
