@@ -36,7 +36,6 @@ export class App extends Component {
   };
 
   render() {
-    const { galleryItems } = this.state;
     return (
       <div>
         <Searchbar onSubmit={this.onSubmit} />
