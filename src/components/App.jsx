@@ -11,11 +11,21 @@ export class App extends Component {
     galleryItems: [],
     error: false,
     query: '',
+    page: 1,
   };
 
-  async componentDidMount() {
+  // async componentDidMount() {
+  //   try {
+  //     const gallery = await fetchImages();
+  //     this.setState({ galleryItems: gallery.hits });
+  //   } catch (error) {
+  //     this.setState({ error: true });
+  //   }
+  // }
+
+  async componentDidUpdate() {
     try {
-      const gallery = await fetchImages();
+      const gallery = await fetchImages(this.state.page,this.state.query);
       this.setState({ galleryItems: gallery.hits });
       console.log(gallery);
     } catch (error) {
@@ -28,6 +38,7 @@ export class App extends Component {
       query: newQuery,
     });
   };
+
 
   getVisibImages = () => {
     return this.state.galleryItems.filter(item =>
