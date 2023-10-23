@@ -19,7 +19,7 @@ export const SearchbarStyled = styled.div`
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 `;
 
-export const SearchForm = styled.div`
+export const SearchForm = styled.form`
   display: flex;
   align-items: center;
   width: 100%;
@@ -34,7 +34,6 @@ export const SearchFormButton = styled.button`
   width: 48px;
   height: 48px;
   border: 0;
-  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;

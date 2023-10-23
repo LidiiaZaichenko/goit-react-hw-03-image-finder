@@ -6,21 +6,20 @@ import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
 import { fetchImages } from 'api';
 
-
 export class App extends Component {
   state = {
     galleryItems: [],
     error: false,
     query: '',
     page: 1,
+    isLastPage: false,
   };
 
-  // async componentDidMount() {
-  //   try {
-  //     const gallery = await fetchImages();
-  //     this.setState({ galleryItems: gallery.hits });
-  //   } catch (error) {
-  //     this.setState({ error: true });
+  // componentDidUpdate(_prevProps, prevState) {
+  //   if (prevState.query !== this.state.query) {
+  //     this.setState({ galleryItems: [], page: 1, isLastPage: false }, () => {
+  //       fetchImages();
+  //     });
   //   }
   // }
 
@@ -34,9 +33,16 @@ export class App extends Component {
     }
   }
 
-  onSubmit = newQuery => {
+  handleSearchSubmit = query => {
+    if (this.state.query === query) {
+      return;
+    }
     this.setState({
-      query: newQuery,
+      query: query,
+      page: 1,
+      galleryItems: [],
+      error: null,
+      isLastPage: false,
     });
   };
 
@@ -49,8 +55,8 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <Searchbar onSubmit={this.onSubmit} />
-        <ImageGallery listImages={this.state.galleryItems} />
+        <Searchbar onSubmit={this.handleSearchSubmit} />
+        <ImageGallery listImages={this.getVisibImages()} />
         <Modal />
         <Button />
         <Loader />
