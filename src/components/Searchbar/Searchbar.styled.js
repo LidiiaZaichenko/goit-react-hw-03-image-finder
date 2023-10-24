@@ -14,7 +14,7 @@ export const SearchbarStyled = styled.div`
   padding-top: 12px;
   padding-bottom: 12px;
   color: #fff;
-  background-color: #3f51b5;
+  background-color: ${p => p.theme.color.blue};
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 `;
@@ -40,6 +40,9 @@ export const SearchFormButton = styled.button`
   opacity: 0.6;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
+  svg {
+    color: ${p=>p.theme.color.blue};
+  }
 `;
 
 export const SearchFormButtonLabel = styled.span`
@@ -53,7 +56,6 @@ export const SearchFormButtonLabel = styled.span`
   clip-path: inset(50%);
   border: 0;
 `;
-
 
 export const SearchFormInput = styled.input`
   display: inline-block;
