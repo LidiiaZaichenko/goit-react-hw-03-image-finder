@@ -3,7 +3,6 @@ import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
-import { Modal } from './Modal/Modal';
 import { fetchImages } from 'api';
 
 
@@ -80,7 +79,6 @@ export class App extends Component {
         {error && <div>Whoops! Error! Please reload this page!</div>}
         {visibImages.length > 0 && <ImageGallery listImages={visibImages} />}
         <Button onClick = {this.handleLoadMore} page={this.state.page}/>
-        <Modal />
       </div>
     );
   }
