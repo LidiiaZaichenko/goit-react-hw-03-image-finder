@@ -15,21 +15,11 @@ export class App extends Component {
     isLastPage: false,
   };
 
-  // componentDidUpdate(_prevProps, prevState) {
-  //   if (prevState.query !== this.state.query) {
-  //     this.setState({ galleryItems: [], page: 1, isLastPage: false }, () => {
-  //       fetchImages();
-  //     });
-  //   }
-  // }
-
-  async componentDidUpdate() {
-    try {
+  async componentDidUpdate(prevState) {
+    if (this.state.query !== '') {
       const gallery = await fetchImages(this.state.page, this.state.query);
       this.setState({ galleryItems: gallery.hits });
       console.log(gallery);
-    } catch (error) {
-      this.setState({ error: true });
     }
   }
 
@@ -56,7 +46,7 @@ export class App extends Component {
     return (
       <div>
         <Searchbar onSubmit={this.handleSearchSubmit} />
-        <ImageGallery listImages={this.getVisibImages()} />
+        <ImageGallery listImages={this.state.galleryItems} />
         <Modal />
         <Button />
         <Loader />
