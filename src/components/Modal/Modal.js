@@ -15,30 +15,20 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export class ModalItem extends Component {
-  state = {
-    modalIsOpen: false,
-  };
 
-  openModal = () => {
-    this.setState({ modalIsOpen: true });
-  };
-
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
-  };
 
   render() {
-    const { listImage } = this.props;
-    const { modalIsOpen } = this.state;
+    const { listImage,isCloseModal,isOpenModal} = this.props;
+  
     return (
       <div>
         <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={this.closeModal}
+          isOpen={isOpenModal}
+          onRequestClose={isCloseModal}
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <img src={listImage.largeImageURL} alt="" />
+          <img src={listImage.largeImageURL} alt={listImage.tags} />
         </Modal>
       </div>
     );

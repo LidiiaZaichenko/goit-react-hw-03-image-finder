@@ -5,7 +5,6 @@ import { Button } from './Button/Button';
 import { Loader } from './Loader/Loader';
 import { fetchImages } from 'api';
 
-
 export class App extends Component {
   state = {
     galleryItems: [],
@@ -13,72 +12,50 @@ export class App extends Component {
     loading: false,
     query: '',
     page: 1,
-    isLastPage: false,
+    perPage: 12,
   };
 
-  async componentDidMount() {
-    try {
-      this.setState({ loading: true, error: false });
-      // const gallery = await fetchImages(this.state.page, this.state.query);
-      // this.setState({ galleryItems: gallery.hits });
-      // console.log(gallery);
-    } catch (error) {
-      this.setState({ error: true });
-    } finally {
-      this.setState({ loading: false });
-    }
-  }
-
   async componentDidUpdate(prevProps, prevState) {
-    console.log('prevState', prevState);
-    console.log('this.state', this.state);
+    const { page, query, perPage } = this.state;
+    if (prevState.query !== query || prevState.page !== page) {
+      const gallery = await fetchImages(page, query, perPage);
 
-    if (
-      prevState.query !== this.state.query ||
-      prevState.page !== this.state.page
-    ) {
-      const gallery = await fetchImages(this.state.page, this.state.query);
-      this.setState({ galleryItems: gallery.hits });
+      try {
+        this.setState({ galleryItems: gallery.hits });
+        this.setState({ loading: true, error: false });
+      } catch (error) {
+        this.setState({ error: true });
+      } finally {
+        this.setState({ loading: false });
+      }
     }
   }
 
   handleSearchSubmit = query => {
-    if (this.state.query === query) {
-      return;
-    }
     this.setState({
       query: query,
-      page: 1,
       galleryItems: [],
-      error: null,
-      isLastPage: false,
     });
   };
 
-  handleLoadMore = page => {
-    if (this.state.page === page) {
-      return;
-    }
-    this.setState(prevState => prevState.page + 1);
-  };
-
-  getVisibImages = () => {
-    return this.state.galleryItems.filter(item =>
-      item.tags.toLowerCase().includes(this.state.query.toLowerCase())
-    );
+  handleLoadMore = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+      perPage: prevState.perPage + 12,
+    }));
   };
 
   render() {
-    const visibImages = this.getVisibImages();
-    const { loading, error } = this.state;
+    const { loading, error, galleryItems, page } = this.state;
+    console.log(page);
 
     return (
       <div>
         <Searchbar onSubmit={this.handleSearchSubmit} />
         {loading && <Loader />}
         {error && <div>Whoops! Error! Please reload this page!</div>}
-        {visibImages.length > 0 && <ImageGallery listImages={visibImages} />}
-        <Button onClick = {this.handleLoadMore} page={this.state.page}/>
+        {galleryItems.length > 0 && <ImageGallery listImages={galleryItems} />}
+        {galleryItems.length > 0 && <Button onClick={this.handleLoadMore} />}
       </div>
     );
   }

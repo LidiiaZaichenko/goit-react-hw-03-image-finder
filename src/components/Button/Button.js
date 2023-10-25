@@ -1,7 +1,7 @@
-export const Button = ({ onClick, page }) => {
+export const Button = ({ onClick }) => {
   return (
     <div>
-      <button onClick={() => {onClick(page)}}>Load more</button>
+      <button onClick={onClick}>Load more</button>
     </div>
   );
 };

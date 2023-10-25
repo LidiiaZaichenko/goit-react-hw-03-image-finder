@@ -9,7 +9,7 @@ const params = new URLSearchParams({
   per_page: 12,
 });
 
-export const fetchImages = async (page,q) => {
-  const response = await axios.get(`${BASE_URL}${params}&page=${page}$&q=${q}`);
+export const fetchImages = async (page,q,perPage) => {
+  const response = await axios.get(`${BASE_URL}${params}&page=${page}$&q=${q}&per_page=${perPage}`);
   return response.data;
 };
