@@ -22,6 +22,15 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export class ModalItem extends Component {
+  state = {
+    modalIsOpen: true,
+  };
+
+  isOverlayClose = event => {
+    event.preventDefault();
+    this.props.isOpenModal(this.state.modalIsOpen);
+  };
+
   render() {
     const { listImage, isCloseModal, isOpenModal } = this.props;
 

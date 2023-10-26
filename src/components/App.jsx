@@ -9,7 +9,7 @@ export class App extends Component {
   state = {
     galleryItems: [],
     error: false,
-    loading: false,
+    loading: true,
     query: '',
     page: 1,
     perPage: 12,
