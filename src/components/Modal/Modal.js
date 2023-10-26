@@ -1,8 +1,15 @@
 import Modal from 'react-modal';
 import { Component } from 'react';
+import { ModalImg } from './Modal.styled';
 
 const customStyles = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    zIndex: '1200',
+  },
   content: {
+    border: '0px solid rgb(204, 204, 204)',
+    padding: '0',
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -15,22 +22,18 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export class ModalItem extends Component {
-
-
   render() {
-    const { listImage,isCloseModal,isOpenModal} = this.props;
-  
+    const { listImage, isCloseModal, isOpenModal } = this.props;
+
     return (
-      <div>
-        <Modal
-          isOpen={isOpenModal}
-          onRequestClose={isCloseModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <img src={listImage.largeImageURL} alt={listImage.tags} />
-        </Modal>
-      </div>
+      <Modal
+        isOpen={isOpenModal}
+        onRequestClose={isCloseModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <ModalImg src={listImage.largeImageURL} alt={listImage.tags} />
+      </Modal>
     );
   }
 }

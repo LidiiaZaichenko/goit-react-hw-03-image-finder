@@ -18,9 +18,9 @@ export class ImageGalleryItem extends Component {
     const { listImage } = this.props;
     return (
       <div>
-        <GalleryImage >
+        <GalleryImage onClick={this.openModal}>
           <Image src={listImage.webformatURL} alt={listImage.tags} />
-          <ModalItem listImage={listImage} isCloseModal={this.closeModal} isOpenModal={this.openModal} />
+          <ModalItem listImage={listImage} isCloseModal={this.closeModal} isOpenModal={this.state.modalIsOpen} />
         </GalleryImage>
        
       </div>
