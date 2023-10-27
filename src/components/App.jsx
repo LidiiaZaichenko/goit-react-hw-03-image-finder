@@ -9,20 +9,25 @@ export class App extends Component {
   state = {
     galleryItems: [],
     error: false,
-    loading: true,
+    loading: false,
     query: '',
     page: 1,
-    perPage: 12,
+    totalPages: 0,
   };
 
   async componentDidUpdate(prevProps, prevState) {
-    const { page, query, perPage } = this.state;
+    const { page, query } = this.state;
     if (prevState.query !== query || prevState.page !== page) {
-      const gallery = await fetchImages(page, query, perPage);
+      this.setState({ loading: true });
+
+      const gallery = await fetchImages(page, query);
 
       try {
-        this.setState({ galleryItems: gallery.hits });
-        this.setState({ loading: true, error: false });
+        this.setState(prevState => ({
+          galleryItems: [...prevState.galleryItems, ...gallery.hits],
+          totalPages: Math.ceil(gallery.totalHits / 12),
+          error: false,
+        }));
       } catch (error) {
         this.setState({ error: true });
       } finally {
@@ -35,18 +40,18 @@ export class App extends Component {
     this.setState({
       query: query,
       galleryItems: [],
+      page: 1,
     });
   };
 
   handleLoadMore = () => {
     this.setState(prevState => ({
       page: prevState.page + 1,
-      perPage: prevState.perPage + 12,
     }));
   };
 
   render() {
-    const { loading, error, galleryItems, page } = this.state;
+    const { loading, error, galleryItems, page,totalPages } = this.state;
     console.log(page);
 
     return (
@@ -55,7 +60,7 @@ export class App extends Component {
         {loading && <Loader />}
         {error && <div>Whoops! Error! Please reload this page!</div>}
         {galleryItems.length > 0 && <ImageGallery listImages={galleryItems} />}
-        {galleryItems.length > 0 && <Button onClick={this.handleLoadMore} />}
+        {galleryItems.length > 0 && totalPages !== page && !loading && ( <Button onClick={this.handleLoadMore} />)}
       </div>
     );
   }

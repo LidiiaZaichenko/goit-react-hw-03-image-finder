@@ -20,9 +20,8 @@ export class ImageGalleryItem extends Component {
       <div>
         <GalleryImage onClick={this.openModal}>
           <Image src={listImage.webformatURL} alt={listImage.tags} />
-          <ModalItem listImage={listImage} isCloseModal={this.closeModal} isOpenModal={this.state.modalIsOpen} />
         </GalleryImage>
-       
+        <ModalItem listImage={listImage} isCloseModal={this.closeModal} isOpenModal={this.state.modalIsOpen} />
       </div>
     );
   }

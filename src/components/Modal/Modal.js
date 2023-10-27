@@ -1,5 +1,4 @@
 import Modal from 'react-modal';
-import { Component } from 'react';
 import { ModalImg } from './Modal.styled';
 
 const customStyles = {
@@ -21,18 +20,7 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-export class ModalItem extends Component {
-  state = {
-    modalIsOpen: true,
-  };
-
-  isOverlayClose = event => {
-    event.preventDefault();
-    this.props.isOpenModal(this.state.modalIsOpen);
-  };
-
-  render() {
-    const { listImage, isCloseModal, isOpenModal } = this.props;
+export const ModalItem = ({ listImage, isCloseModal, isOpenModal }) => {
 
     return (
       <Modal
@@ -45,4 +33,3 @@ export class ModalItem extends Component {
       </Modal>
     );
   }
-}
